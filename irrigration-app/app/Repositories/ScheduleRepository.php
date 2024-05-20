@@ -16,4 +16,9 @@ class ScheduleRepository extends BaseRepository
     {
         return $zone->schedules()->create($data);
     }
+
+    public function getZoneSchedule(Zone $zone)
+    {
+        return $zone->schedules()->get();
+    }
 }

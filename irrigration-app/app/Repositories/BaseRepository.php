@@ -20,6 +20,11 @@ abstract class BaseRepository
         return $this->getModel()->where('name', $name)->first();
     }
 
+    public function findFirst($conditions)
+    {
+        return $this->getModel()->where($conditions)->first();
+    }
+
     public function findAll($conditions = [], $with = [], $column = 'id', $order = 'DESC')
     {
         return $this->getModel()->where($conditions)->with($with)->orderBy($column, $order)->get();

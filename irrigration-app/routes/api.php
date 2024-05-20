@@ -38,11 +38,11 @@ Route::prefix('irrigation')->middleware('auth:sanctum')->group(function(){
 
     Route::get('zones/{zoneId}/schedules', [ScheduleController::class, 'index']);
 
-    Route::get('/schedules/{scheduleId}', [ScheduleController::class, 'show']);
+    Route::get('zones/{zoneId}/schedules/{scheduleId}', [ScheduleController::class, 'show']);
 
-    Route::put('/schedules/{scheduleId}', [ScheduleController::class, 'update']);
+    Route::put('zones/{zoneId}/schedules/{scheduleId}', [ScheduleController::class, 'update']);
 
-    Route::delete('/schedules/{scheduleId}', [ScheduleController::class, 'destroy']);
+    Route::delete('zones/{zoneId}/schedules/{scheduleId}', [ScheduleController::class, 'destroy']);
 
  
 });

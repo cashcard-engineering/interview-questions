@@ -33,9 +33,6 @@ class ZoneController extends Controller
     public function show(Request $request)
     {
         $data = $this->zoneService->getZone($request->zoneId);
-        if (!$data) {
-            return response()->json(['status' => true, 'message' => 'No data exists for this zone'], 404);
-        }
         return response()->json(['status' => true, $data], 200);
     }
 
