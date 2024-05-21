@@ -1,5 +1,5 @@
 # IRRIGATION SYSTEM
-
+[Link to solution Document](/Document.md)
 Your task is to design and implement a RESTful API for managing an irrigation system. The system should allow users to manage irrigation zones, schedules, and watering events. Additionally, whenever a schedule is created or updated, an email should be sent to the admin (admin@cashcardng.com).
 
 ## Requirements
