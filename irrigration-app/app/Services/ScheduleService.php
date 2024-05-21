@@ -13,11 +13,13 @@ class ScheduleService
 {
     protected $repo;
     protected $zoneRepo;
+    protected $zoneService;
 
-    public function __construct(ScheduleRepository $repo, ZoneRepository $zoneRepo)
+    public function __construct(ScheduleRepository $repo, ZoneRepository $zoneRepo, ZoneService $zoneService)
     {
         $this->repo = $repo;
         $this->zoneRepo = $zoneRepo;
+        $this->zoneService = $zoneService;
     }
 
     private function findZoneById($id)
@@ -65,9 +67,10 @@ class ScheduleService
     {
         $zone = $this->zoneRepo->findById($zoneId);
         $schedule = $this->repo->findById($scheduleId);
+        $mailData = $this->zoneService->getZone($zoneId);
         throw_if($schedule->zone_id != $zone->id, new \Exception('Schedule is not part of this zone'));
         $schedule->update($data);
-        $this->sendEmail($data);
+        $this->sendEmail($mailData);
         return $schedule;
     }
 

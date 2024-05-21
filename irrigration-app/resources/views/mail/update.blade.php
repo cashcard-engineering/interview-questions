@@ -39,7 +39,7 @@
         </div>
         <div class="content">
             <p>Dear Admin,</p>
-            <p>A schedule for {{data->name}} has been updated.</p>
+            <p>A schedule for Zone {{data->name}} has been updated.</p>
         </div>
     </div>
 </body>
