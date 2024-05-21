@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ZoneRequest;
+use App\Http\Resources\WateringStatusResource;
 use App\Services\ZoneService;
 use Illuminate\Http\Request;
 
@@ -54,5 +55,12 @@ class ZoneController extends Controller
             return response()->json(['message' => 'item not deleted successfully'], 500);
         }
         return response()->json(['message'=>'zone deleted successfully']);
+    }
+
+    public function getWateringStatus(Request $request)
+    {
+        $data = $this->zoneService->getZone($request->zoneId);
+        $transformedData = new WateringStatusResource($data);
+        return response()->json($transformedData, 200);
     }
 }

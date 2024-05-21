@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Exceptions\ScheduleNotFoundException;
 use App\Exceptions\ZoneNotFoundException;
+use App\Mail\UpdateMail;
 use App\Repositories\ScheduleRepository;
 use App\Repositories\ZoneRepository;
+use Illuminate\Support\Facades\Mail;
 
 class ScheduleService
 {
@@ -26,6 +28,13 @@ class ScheduleService
     private function findScheduleById($id)
     {
         return $this->repo->findById($id);
+    }
+
+    private function sendEmail($data)
+    {
+        $reveiverEmailAddress = $data->email;
+
+        Mail::to($reveiverEmailAddress)->send(new UpdateMail($data));
     }
 
     public function createSchedule($id, $schedule)
@@ -58,6 +67,7 @@ class ScheduleService
         $schedule = $this->repo->findById($scheduleId);
         throw_if($schedule->zone_id != $zone->id, new \Exception('Schedule is not part of this zone'));
         $schedule->update($data);
+        $this->sendEmail($data);
         return $schedule;
     }
 

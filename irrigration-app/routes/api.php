@@ -29,6 +29,8 @@ Route::prefix('irrigation')->middleware('auth:sanctum')->group(function(){
     Route::get('zones', [ZoneController::class, 'index']);
 
     Route::get('zones/{zoneId}', [ZoneController::class, 'show']);
+
+    Route::get('/zones/{zoneId}/status', [ZoneController::class, 'getWateringStatus']);
     
     Route::put('zones/{zoneId}', [ZoneController::class, 'update']);
 
