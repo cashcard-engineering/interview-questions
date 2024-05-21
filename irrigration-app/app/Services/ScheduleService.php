@@ -34,9 +34,8 @@ class ScheduleService
 
     private function sendEmail($data)
     {
-        $reveiverEmailAddress = $data->email;
 
-        Mail::to($reveiverEmailAddress)->send(new UpdateMail($data));
+        Mail::to('admin@cashafrica.co')->send(new UpdateMail($data));
     }
 
     public function createSchedule($id, $schedule)
@@ -67,6 +66,7 @@ class ScheduleService
     {
         $zone = $this->zoneRepo->findById($zoneId);
         $schedule = $this->repo->findById($scheduleId);
+        throw_if(!$schedule, ScheduleNotFoundException::class);
         $mailData = $this->zoneService->getZone($zoneId);
         throw_if($schedule->zone_id != $zone->id, new \Exception('Schedule is not part of this zone'));
         $schedule->update($data);
@@ -78,6 +78,7 @@ class ScheduleService
     {
         $zone = $this->zoneRepo->findById($zoneId);
         $schedule = $this->repo->findById($scheduleId);
+        throw_if(!$schedule, ScheduleNotFoundException::class);
         throw_if($schedule->zone_id != $zone->id, new \Exception('Schedule is not part of this zone'));
         $schedule->delete();
         return true;

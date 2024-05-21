@@ -3,16 +3,13 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class UpdateMail extends Mailable
 {
     use Queueable, SerializesModels;
-    private $data;
+    public $data;
     /**
      * Create a new message instance.
      *
@@ -36,6 +33,6 @@ class UpdateMail extends Mailable
          * "resources/views" folder. If you don't have this file, then
          * create it.
          */
-        return $this->from("")->view('mail.update')->subject('Schedule changed');
+        return $this->from("praiseadediji@gmail.com")->view('mail.update')->subject('Schedule changed');
     }
 }
